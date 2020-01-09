@@ -28,8 +28,9 @@ $this->title = 'My Yii Application';
 	        	],
 	            'descricao',
 	           	[	
-	           		'format' => ['Currency', 'R$ '],
 	           		'attribute' => 'preco',
+	           		'value' => function($model){ return Yii::$app->formatter->asCurrency($model->preco);}
+	           		
 	           	]	
 	            
 	        ],
