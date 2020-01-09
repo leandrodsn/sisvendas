@@ -19,14 +19,13 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'giZ3S_aACpX6M8tNi_6r_DHOhy7QV9H0',
         ],
-        'Formatter' => [
+        'formatter' => [
             'class'=> 'yii\i18n\Formatter',
             'dateFormat' => 'php:d/m/Y',
             'datetimeFormat' => 'php:d/m/Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'decimalSeparator' => ',',
             'thousandSeparator' => '.',
-            'currecyCode' => 'R$',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
