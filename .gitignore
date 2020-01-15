@@ -1,0 +1,40 @@
+# phpstorm project files
+.idea/**
+
+# windows thumbnail cache
+Thumbs.db
+.DS_Store
+
+# composer vendor dir
+vendor/**
+
+# Uploads dir
+web/media
+
+# composer itself is not needed
+composer.phar
+
+# Yii temp directories
+web/assets/**
+runtime/**
+web/minify/**
+
+# composer itself is not needed
+composer.lock
+
+# Gulpz
+package.json
+npm-debug.log
+node_modules/**
+
+# phpunit itself is not needed
+phpunit.phar
+
+# local phpunit config
+/phpunit.xml
+
+tests/_output/*
+tests/_support/_generated
+
+#vagrant folder
+/.vagrant
