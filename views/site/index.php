@@ -8,15 +8,15 @@ use kartik\number\NumberControl;
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Sisvendas';
 ?>
 <div class="site-index">
-    
-
     <div class="body-content mt-5">
-	
     	<h1><?= Html::encode($this->title) ?></h1>
-		
+    	<div class="wrapper-price">
+    		<h1 class="btn btn-primary"> Total: <span class="badge badge-light badge-price">R$ 0,0</span></h1>
+    	</div>
+    	<div class="tab-price">0</div>
 		<?php ActiveForm::begin(['id' => 'form-venda', 'action' => 'site/venda'])?>
 		<?= GridView::widget([
 	        'dataProvider' => $dataProvider,
@@ -30,23 +30,10 @@ $this->title = 'My Yii Application';
 	           	[	
 	           		'attribute' => 'preco',
 	           		'value' => function($model){ return Yii::$app->formatter->asCurrency($model->preco);}
-	           		
 	           	]	
-	            
 	        ],
 	    ]);?>
-		
 		<?= Html::button('Concluir venda', ['class' => 'btn btn-success']) ?>
 		<?php ActiveForm::end();?>
-    </div>
-
-    <div class="container">
-    	<div class="row">
-    		<?php foreach ($clientes as $c):?>
-				<p><?=$c->nome?></p>
-				<p><?=$c->email?></p>
-				<p><?=$c->cpf?></p>
-    		<?php endforeach; ?>
-    	</div>
     </div>
 </div>
