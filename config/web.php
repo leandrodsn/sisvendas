@@ -58,6 +58,9 @@ $config = [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'rules' => [
+                '<action:\w+>' => 'site/<action>'
+            ]
    
         ],
     ],
