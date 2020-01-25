@@ -3,14 +3,12 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\number\NumberControl;
 
-
-/* @var $this yii\web\View */
 
 $this->title = 'Sisvendas';
 ?>
 <div class="site-index">
+    <h2 class="title">Wellcome to Sisvendas!</h2>
     <div class="body-content mt-5">
     	<h1><?= Html::encode($this->title) ?></h1>
     	<div class="wrapper-price">
@@ -19,11 +17,11 @@ $this->title = 'Sisvendas';
     	<div class="tab-price">0</div>
 		<?php ActiveForm::begin(['id' => 'form-venda', 'action' => 'site/venda'])?>
 		<?= GridView::widget([
-	        'dataProvider' => $dataProvider,
+	        'dataProvider' => $provider,
 	        "id" => "grid",
 	        'columns' => [
 	            [
-	            	'class' => 'yii\grid\CheckboxColumn', 
+	            	'class' => 'yii\grid\CheckboxColumn',	
 	            	'multiple' => true
 	        	],
 	            'descricao',

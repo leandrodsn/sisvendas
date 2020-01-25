@@ -7,9 +7,6 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\ProdutoSearch;
-use app\models\LoginForm;
-use app\models\ContactForm;
 use yii\web\BadRequestHttpException;
 
 class SiteController extends Controller
@@ -62,14 +59,13 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex()
-    {
-        $searchModel = new ProdutoSearch();
+    {   
+        $searchModel = new \app\models\Produto;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $clientes =  \app\models\ClienteModel::find()->All();
         Yii::$app->view->registerJsFile('@web/js/site/index.js', ['depends' => [\app\assets\AppAsset::className()]]);
 
-        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'clientes' => $clientes]);
+        return $this->render('index', ['provider'=>$dataProvider, 'model'=>$dataProvider->models]);
     }
 
     /**
@@ -108,65 +104,11 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
+    public function actionCadastroProduto()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
+        $productForm = new \app\models\Produto;
 
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->render('cadastrar-produto', ['productForm' => $productForm]);
     }
 }

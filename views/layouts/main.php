@@ -41,21 +41,15 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             [
-                'label' => 'Cliente', 
-                'items' => 
-                [
-                    ['label' => 'cadastrar', 'url' => ['/cliente/create']],
-                    ['label' => 'todos', 'url' => ['/cliente/index']],
-                ],
                 'label' => 'Produto', 
                 'items' => 
                 [
-                    ['label' => 'cadastrar', 'url' => ['/produto/create']],
-                    ['label' => 'todos', 'url' => ['/produto/index']],
+                    ['label' => 'cadastrar', 'url' => ['cadastro-produto']],
+                    ['label' => 'todos', 'url' => ['produto']],
                 ]
 
             ],
-            Yii::$app->user->isGuest ? (
+            /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
@@ -66,8 +60,8 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
-        ],
+            )*/
+        ]
     ]);
     NavBar::end();
     ?>
