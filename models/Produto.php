@@ -22,20 +22,19 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'data_validade'], 'required', 'except' => 'search'],
-            [['price', 'data_validade'], 'safe'],
+            [['name', 'price'], 'required', 'except' => 'search'],
+            [['data_validade'], 'date'],
+            [['price'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
     }
 
-
-    public function behaviors()
+    public function beforeSave($insert)
     {
-        return [
-            TimestampBehavior::className()
-        ];
+        $date =  explode('/', $this->data_validade);
+        $this->data_validade = $date[2].'-'.$date[1].'-'.$date[0];
+        return parent::beforeSave($insert);
     }
-
     /**
      * {@inheritdoc}
      */

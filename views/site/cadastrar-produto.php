@@ -13,7 +13,12 @@ $this->title = 'Cadastro de Produtos';
 				'method' => 'POST',
 				'enableAjaxValidation' => false
 			]); ?>
-				
+				<?php if(Yii::$app->session->hasFlash('success')): ?>
+					<div class="alert alert-sucess"><?=Yii::$app->session->getFlash('success')?></div>
+				<?php endif; ?>
+				<?php if(Yii::$app->session->hasFlash('error')): ?>
+					<div class="alert alert-error"><?=Yii::$app->session->getFlash('error')?></div>
+				<?php endif; ?>
 				<div class="row">
 					<div class="col-md-6">
 						<?=$form->field($productForm, 'name')->textInput()?>
@@ -22,7 +27,19 @@ $this->title = 'Cadastro de Produtos';
 
 				<div class="row">
 					<div class="col-md-6">
-						<?=$form->field($productForm, 'price')->textInput(['type'=>'number'])?>
+						<?=$form->field($productForm, 'price')->widget(\yii\widgets\MaskedInput::className(),[
+							'name'=>'masked-input',
+							'clientOptions' => [
+								'alias' => 'decimal',
+						        'digits' => 2,
+						        'digitsOptional' => false,
+						        'radixPoint' => ',',
+						        'prefix'=>'R$ ',
+						        'groupSeparator' => '.',
+						        'autoGroup' => true,
+						        'removeMaskOnSubmit' => true,
+							]
+						])?>
 					</div>
 				</div>
 

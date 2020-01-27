@@ -109,6 +109,20 @@ class SiteController extends Controller
 
         $productForm = new \app\models\Produto;
 
+        if($post = Yii::$app->request->post()){
+            if($productForm->load($post) && $productForm->validate()){
+                $productForm->save();
+                Yii::$app->session->setFlash('success', 'Produto salvo com sucesso!');
+
+                //Unset model attributes
+                $productForm = new \app\models\Produto;
+            }else 
+            {
+                Yii::$app->session->setFlash('error', 'Erro ao salvar produto: '.$productForm->getErrors());
+                print_r($productForm->getErrors());die();
+            }
+        }
+
         return $this->render('cadastrar-produto', ['productForm' => $productForm]);
     }
 }
