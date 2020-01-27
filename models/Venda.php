@@ -22,7 +22,7 @@ class Venda extends \yii\db\ActiveRecord
     {
         return [
             [['valor_total', 'created_at', 'ven_funcionario_id'], 'required'],
-            [['valor_total'], 'salfe'],
+            [['valor_total'], 'safe'],
             [['created_at', 'ven_funcionario_id'], 'integer'],
             [['ven_funcionario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Funcionario::className(), 'targetAttribute' => ['ven_funcionario_id' => 'id']],
         ];
