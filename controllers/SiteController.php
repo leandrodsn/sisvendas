@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
+use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
@@ -124,5 +125,17 @@ class SiteController extends Controller
         }
 
         return $this->render('cadastrar-produto', ['productForm' => $productForm]);
+    }
+
+    public function actionProdutos(){
+
+        $query = \app\models\Produto::find();
+        $provider = new ActiveDataProvider([
+            'query'=>$query,
+            'pagination'=>[
+                'pageSize'=>20
+            ]
+        ]);        
+        return $this->render('produtos', ['models'=>$provider->models, 'provider'=>$provider]);
     }
 }

@@ -45,7 +45,7 @@ AppAsset::register($this);
                 'items' => 
                 [
                     ['label' => 'cadastrar', 'url' => ['cadastro-produto']],
-                    ['label' => 'todos', 'url' => ['produto']],
+                    ['label' => 'todos', 'url' => ['produtos']],
                 ]
 
             ],

@@ -24,10 +24,10 @@ $this->title = 'Sisvendas';
 	            	'class' => 'yii\grid\CheckboxColumn',	
 	            	'multiple' => true
 	        	],
-	            'descricao',
+	            'name',
 	           	[	
-	           		'attribute' => 'preco',
-	           		'value' => function($model){ return Yii::$app->formatter->asCurrency($model->preco);}
+	           		'attribute' => 'price',
+	           		'value' => function($model){ return Yii::$app->formatter->asCurrency($model->price);}
 	           	]	
 	        ],
 	    ]);?>

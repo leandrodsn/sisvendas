@@ -51,6 +51,12 @@ $this->title = 'Cadastro de Produtos';
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-6">
+						<?=$form->field($productForm, 'is_available')->dropDownList([0=>'Não', 1=>'Sim'])?>
+					</div>
+				</div>
+
 				<?= Html::submitButton('Cadastrar', ['options' => ['class'=> 'btn btn-primary']])  ?>
 			<?php ActiveForm::end(); ?>
 		</div>

@@ -22,8 +22,9 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price'], 'required', 'except' => 'search'],
+            [['name', 'price', 'is_available'], 'required', 'except' => 'search'],
             [['data_validade'], 'date'],
+            [['is_available'], 'integer'],
             [['price'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -42,9 +43,10 @@ class Produto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'price' => 'Price',
-            'data_validade' => 'Data Validade',
+            'name' => 'Nome',
+            'price' => 'Preço',
+            'data_validade' => 'Data de Validade',
+            'is_available'  => 'Disponível'
         ];
     }
 
