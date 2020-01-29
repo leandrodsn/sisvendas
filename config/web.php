@@ -55,11 +55,11 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'class' => 'yii\web\UrlManager',
+            'class' => '\yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<action:\w+>' => 'site/<action>'
+                '<controller:[\w-]+>/<action:[\w-]+>' => 'site/<action>'
             ]
    
         ],
