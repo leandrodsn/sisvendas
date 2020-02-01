@@ -31,7 +31,8 @@ class Produto extends \yii\db\ActiveRecord
     }
 
     public function beforeSave($insert)
-    {
+    {   
+        $this->price = floatval(strtr($this->price, [','=>'.']));
         $date =  explode('/', $this->data_validade);
         $this->data_validade = $date[2].'-'.$date[1].'-'.$date[0];
         return parent::beforeSave($insert);
