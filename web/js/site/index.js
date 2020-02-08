@@ -23,7 +23,7 @@
 	var total_price = parseFloat($(".badge-price").text().replace(/[^0-9,.]/g, ''));
 	rows.each(function($e){
 		let siblings = $(this).find("td").siblings();
-		$(this).find("input[type='checkbox']").on('click', function(){
+		$(this).find("input[type='checkbox']").on('change', function(){
 			let price = siblings.last().html();
 			price = price.replace(/[^0-9.,]/g, '').replace(',', '.');
 			if($(this).is(':checked'))
