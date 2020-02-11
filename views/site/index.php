@@ -14,7 +14,6 @@ $this->title = 'Sisvendas';
     	<div class="wrapper-price">
     		<h1 class="btn btn-primary"> Total: <span class="badge badge-light badge-price">R$ 0,0</span></h1>
     	</div>
-    	<div class="tab-price">0</div>
 		<?php ActiveForm::begin(['id' => 'form-venda', 'action' => 'site/venda'])?>
 		<?= GridView::widget([
 	        'dataProvider' => $provider,
@@ -22,7 +21,7 @@ $this->title = 'Sisvendas';
 	        'columns' => [
 	            [
 	            	'class' => 'yii\grid\CheckboxColumn',	
-	            	'multiple' => true
+	            	'multiple' => false
 	        	],
 	            'name',
 	           	[	

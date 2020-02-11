@@ -23,8 +23,8 @@ class Funcionario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'cpf', 'tel'], 'required', 'except' => 'search'],
-            [['name'], 'string', 'max' => 150],
+            [['nome', 'cpf', 'tel'], 'required', 'except' => 'search'],
+            [['nome'], 'string', 'max' => 150],
             [['cpf'], CpfValidator::className()],
             [['tel'], PhoneValidator::className()]
         ];
@@ -37,7 +37,7 @@ class Funcionario extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'nome' => 'Nome',
             'cpf' => 'Cpf',
             'tel' => 'Tel',
         ];
@@ -81,7 +81,7 @@ class Funcionario extends \yii\db\ActiveRecord
             'id'=>$this->id
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'nome', $this->name]);
 
         return $dataProvider;
     }

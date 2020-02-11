@@ -105,7 +105,7 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionCadastroProduto()
+    public function actionCadastrarProduto()
     {
 
         $productForm = new \app\models\Produto;
@@ -137,5 +137,39 @@ class SiteController extends Controller
             ]
         ]);        
         return $this->render('produtos', ['models'=>$provider->models, 'provider'=>$provider]);
+    }
+
+    public function actionCadastrarFuncionario()
+    {
+
+        $funcForm = new \app\models\Funcionario;
+
+        if($post = Yii::$app->request->post()){
+            if($funcForm->load($post) && $funcForm->validate()){
+                $funcForm->save();
+                Yii::$app->session->setFlash('success', 'Funcionario cadastrado com sucesso!');
+
+                //Unset model attributes
+                $funcForm = new \app\models\Funcionario;
+            }else 
+            {
+                Yii::$app->session->setFlash('error', 'Erro ao salvar funcionario: '.$funcForm->getErrors());
+                print_r($funcForm->getErrors());die();
+            }
+        }
+
+        return $this->render('cadastrar-funcionario', ['funcForm' => $funcForm]);
+    }
+
+    public function actionFuncionarios(){
+
+        $query = \app\models\Funcionario::find();
+        $provider = new ActiveDataProvider([
+            'query'=>$query,
+            'pagination'=>[
+                'pageSize'=>20
+            ]
+        ]);        
+        return $this->render('funcionarios', ['models'=>$provider->models, 'provider'=>$provider]);
     }
 }
