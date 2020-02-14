@@ -57,7 +57,7 @@ $this->title = 'Cadastro de Produtos';
 					</div>
 				</div>
 
-				<?= Html::submitButton('Cadastrar', ['options' => ['class'=> 'btn btn-primary']])  ?>
+				<?= Html::submitButton('Cadastrar', ['class'=> 'btn btn-primary'])  ?>
 			<?php ActiveForm::end(); ?>
 		</div>
 	</div>
