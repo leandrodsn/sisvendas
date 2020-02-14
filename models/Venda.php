@@ -4,9 +4,12 @@ namespace app\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\behaviors\TimestampBehavior;
 
 class Venda extends \yii\db\ActiveRecord
 {
+    
+    public $produto_ids;
     /**
      * {@inheritdoc}
      */
@@ -21,10 +24,11 @@ class Venda extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor_total', 'created_at', 'ven_funcionario_id'], 'required'],
+            [['valor_total', 'ven_funcionario_id'], 'required'],
             [['valor_total'], 'safe'],
             [['created_at', 'ven_funcionario_id'], 'integer'],
             [['ven_funcionario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Funcionario::className(), 'targetAttribute' => ['ven_funcionario_id' => 'id']],
+            [['produto_ids'], 'each', 'rule' => ['integer']]
         ];
     }
 
@@ -32,7 +36,13 @@ class Venda extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => \voskobovich\linker\LinkerBehavior::className(),
+                'relations' => [
+                    'produto_ids' => 'produtos'
+                ],
+            ]
         ];
     }
     /**
@@ -45,6 +55,7 @@ class Venda extends \yii\db\ActiveRecord
             'valor_total' => 'Valor Total',
             'created_at' => 'Create Em',
             'ven_funcionario_id' => 'Funcionario',
+            'produto_ids' => 'Produtos'
         ];
     }
 

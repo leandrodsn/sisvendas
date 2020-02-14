@@ -80,27 +80,33 @@ class SiteController extends Controller
 
         $ids = Yii::$app->request->post('ids');
 
-        $produtos = \app\models\ProdutoModel::find()->where(['id' => $ids])->All();
+
+        $produtos = \app\models\Produto::find()->where(['id' => $ids])->all();
         $total = 0;
 
+        $model = new \app\models\Venda;
         foreach ($produtos as $p) {
-            $total += $p->preco;
+            $total += $p->price;
         }
-
-        $model = new \app\models\VendaModel;
-
-        $model->total =  $total;
+        $model->ven_funcionario_id =  1;
+        $model->valor_total =  $total;
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         if($model->save()){
-            return [
-                'message' => 'success',
-                'code' => '200'
-            ];
+            $model->refresh();
+            foreach ($produtos as $p) {
+                $model->link('produtos',  $p);
+            }
+            if($model->save()) {
+                return [
+                    'message' => 'success',
+                    'code' => '200'
+                ];
+            }
         }
         return [
-            'message' => 'error'.$model->getErrors(),
+            'message' => $model->getErrors(),
             'code' => '400'
         ];
     }
